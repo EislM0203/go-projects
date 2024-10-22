@@ -67,11 +67,11 @@ func writeToFile(balance float64) {
 func readFromFile() (float64, error){
 	data, err := os.ReadFile(accountBalanceFile)
 	if (err != nil) {
-		return 0, errors.New("Failed to find balance file")
+		return 0, errors.New("failed to find balance file")
 	}
 	balance, err := strconv.ParseFloat(string(data), 64)
 	if (err != nil) {
-		return 0, errors.New("File does not contain a number")
+		return 0, errors.New("file does not contain a number")
 	}
 	return balance, nil
 }
