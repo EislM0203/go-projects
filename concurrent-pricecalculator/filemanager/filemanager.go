@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 type FileManager struct {	
@@ -19,6 +20,7 @@ func (fm FileManager) ReadLines() ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error opening file: %v", err)
 	}
+	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
 
@@ -29,15 +31,15 @@ func (fm FileManager) ReadLines() ([]string, error) {
 
 	err = scanner.Err()
 	if err != nil {
-		file.Close()
 		return nil, fmt.Errorf("error scanning the file: %v", err)
 	}
 
-	file.Close()
 	return lines, nil
 }
 
 func (fm FileManager) WriteResult(job interface{}) error {
+	time.Sleep(3 * time.Second) // simulated slow file write
+	
 	dir := "results"
 	if err := os.MkdirAll(dir, os.ModePerm); err != nil {
 		log.Printf("Failed to create directory: %v", err)
@@ -59,8 +61,6 @@ func (fm FileManager) WriteResult(job interface{}) error {
 		log.Printf("Failed to encode JSON: %v", err)
 		return err
 	}
-
-	log.Printf("File %s written successfully", fullPath)
 
 	return nil
 }

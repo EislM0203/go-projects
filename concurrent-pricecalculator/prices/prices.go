@@ -22,10 +22,11 @@ func NewTaxIncludedPriceJob(iom iomanager.IOManager, taxRate float64) *TaxInclud
 	}
 }
 
-func (t *TaxIncludedPriceJob) Process() error {
+func (t *TaxIncludedPriceJob) Process(doneChan chan bool, errChan chan error) {
 	err := t.LoadData()
 	if err != nil {
-		return fmt.Errorf("error loading data: %v", err)
+		errChan <- fmt.Errorf("error loading data: %v", err)
+		return
 	}
 
 	result := make(map[string]string)
@@ -37,10 +38,11 @@ func (t *TaxIncludedPriceJob) Process() error {
 	t.TaxIncludedPrices = result
 	err = t.FileManager.WriteResult(t)
 	if err != nil {
-		return fmt.Errorf("Error writing the result: %v", err)
+		errChan <- fmt.Errorf("error writing the result: %v", err)
+		return
 	}
 
-	return nil
+	doneChan <- true
 }
 
 func (t *TaxIncludedPriceJob) LoadData() error{
