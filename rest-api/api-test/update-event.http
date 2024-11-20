@@ -1,0 +1,10 @@
+PUT http://localhost:8080/events/3
+content-type: application/json
+authorization: <YOUR_JWT_TOKEN>
+
+{
+  "name": "Test Event3",
+  "desc": "This is a second test event",
+  "location": "Test Location 2",
+  "date_time": "2025-01-01T00:00:00.000Z"
+}
