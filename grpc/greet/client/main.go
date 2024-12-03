@@ -26,6 +26,7 @@ func main() {
 	}
 	log.Printf("Response: %v\n", rsp.Result)*/
 
-	GreetManyTimes(client)
+	//GreetManyTimes(client)
+	LongGreet(client)
 	
 }
