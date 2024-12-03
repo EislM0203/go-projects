@@ -1,1 +1,1 @@
-grpc/bin
+./go-projects/grpc/bin/*
