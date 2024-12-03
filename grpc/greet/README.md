@@ -1,0 +1,1 @@
+```protoc -Igreet/proto --go_out=. --go_opt=module=example.com/greet-grpc --go-grpc_out=. --go-grpc_opt=module=example.com/greet-grpc greet/proto/dummy.proto```
