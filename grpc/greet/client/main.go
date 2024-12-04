@@ -28,6 +28,6 @@ func main() {
 
 	//GreetManyTimes(client)
 	//LongGreet(client)
-	GreetEveryone(client)
-	
+	//GreetEveryone(client)
+	GreetWithDeadline(client, 1)
 }
